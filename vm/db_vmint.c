@@ -66,7 +66,7 @@ int Execute(Interpreter *i, VMVALUE *stack, int stackSize)
     for (;;) {
 #ifdef VM_DEBUG
         ShowStack(i);
-        DecodeInstruction(i->pc, i->pc);
+        DecodeInstruction(i->text, i->pc);
 #endif
         switch (VMCODEBYTE(i->pc++)) {
         case OP_HALT:

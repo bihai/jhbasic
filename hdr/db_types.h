@@ -115,7 +115,7 @@ typedef int16_t VMWORD;
 typedef int32_t VMVALUE;
 typedef uint32_t VMUVALUE;
 
-#define DATA_OFFSET             0x80000000
+#define DATA_OFFSET             0x00008000
 
 #define ALIGN_MASK              3
 
