@@ -16,6 +16,18 @@ extern "C"
 /* Common */
 /**********/
 
+#ifdef WIN32
+// Ugh! Visual Studio C++ doesn't supply stdint.h
+typedef char int8_t;
+typedef unsigned char uint8_t;
+typedef short int16_t;
+typedef unsigned short uint16_t;
+typedef int int32_t;
+typedef unsigned int uint32_t;
+#else
+#include <stdint.h>
+#endif
+
 #define VMTRUE      1
 #define VMFALSE     0
 
@@ -32,7 +44,6 @@ extern "C"
 #if defined(MAC) || defined(LINUX)
 
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
 
 typedef int16_t VMWORD;
@@ -56,17 +67,6 @@ typedef uint32_t VMUVALUE;
 #if defined(AVR)
 
 #include <stdio.h>
-#ifdef WIN32
-// Ugh! Visual Studio C++ doesn't supply stdint.h
-typedef char int8_t;
-typedef unsigned char uint8_t;
-typedef short int16_t;
-typedef unsigned short uint16_t;
-typedef int int32_t;
-typedef unsigned int uint32_t;
-#else
-#include <stdint.h>
-#endif
 #include <string.h>
 
 typedef int16_t VMWORD;
@@ -109,7 +109,6 @@ typedef uint16_t VMUVALUE;
 #ifdef PROPELLER_GCC
 
 #include <string.h>
-#include <stdint.h>
 
 typedef int16_t VMWORD;
 typedef int32_t VMVALUE;

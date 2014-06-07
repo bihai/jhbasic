@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <propeller.h>
 #include "db_vm.h"
 #include "db_system.h"
@@ -44,7 +45,7 @@ void VM_flush(void)
 
 void VM_DelayMs(VMVALUE ms)
 {
-    VM_printf("DelayMs called; %d\n", ms);
+    usleep(ms * 1000);
 }
 
 void VM_UpdateLeds(void)
