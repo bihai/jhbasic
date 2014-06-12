@@ -41,7 +41,7 @@ typedef unsigned __int32 uint32_t;
 /* MAC and LINUX */
 /*****************/
 
-#if defined(MAC) || defined(LINUX)
+#if defined(MAC) || defined(LINUX) || defined(WIN32)
 
 #include <stdio.h>
 #include <string.h>
