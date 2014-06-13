@@ -13,6 +13,7 @@
 #include "db_vm.h"
 #include "db_system.h"
 #include "db_vmdebug.h"
+#include "db_abort.h"
 
 /* stack manipulation macros */
 #define Reserve(i, n)   do {                                    \
@@ -328,19 +329,19 @@ static void StackOverflow(Interpreter *i)
     Abort(i, "stack overflow");
 }
 
-void Abort(Interpreter *i, const char *fmt, ...)
-{
-    char buf[100], *p = buf;
-    va_list ap;
-    va_start(ap, fmt);
-    VM_printf("error: ");
-    vsnprintf(buf, sizeof(buf), fmt, ap);
-    while (*p != '\0')
-        VM_putchar(*p++);
-    VM_putchar('\n');
-    va_end(ap);
-    longjmp(i->errorTarget, 1);
-}
+// void Abort(Interpreter *i, const char *fmt, ...)
+// {
+//     char buf[100], *p = buf;
+//     va_list ap;
+//     va_start(ap, fmt);
+//     VM_printf("error: ");
+//     vsnprintf(buf, sizeof(buf), fmt, ap);
+//     while (*p != '\0')
+//         VM_putchar(*p++);
+//     VM_putchar('\n');
+//     va_end(ap);
+//     longjmp(i->errorTarget, 1);
+// }
 
 #ifdef VM_DEBUG
 static void ShowStack(Interpreter *i)

@@ -31,7 +31,6 @@ typedef struct {
 
 /* prototypes from db_vmint.c */
 int Execute(Interpreter *i, VMVALUE *stack, int stackSize);
-void Abort(Interpreter *i, const char *fmt, ...);
 
 #ifdef AVR_VM
 void VM_DelayMs(VMVALUE ms);

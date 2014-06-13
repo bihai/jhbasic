@@ -63,10 +63,3 @@ static int MyGetLine(void *cookie, char *buf, int len)
     FILE *fp = (FILE *)cookie;
     return fgets(buf, len, fp) ? 0 : -1;
 }
-
-#ifdef WIN32
-void VM_putchar(int ch)
-{
-	putchar(ch);
-}
-#endif

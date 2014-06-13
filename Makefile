@@ -43,7 +43,7 @@ EXECUTE_OBJS = \
 $(VM_OBJDIR)/execute.o \
 $(VM_OBJDIR)/osint_posix.o
 
-#DEBUG += -DCOMPILER_DEBUG
+DEBUG += -DCOMPILER_DEBUG
 #DEBUG += -DVM_DEBUG
 
 #CFLAGS = -Wall -DAVR -Os -I$(HDRDIR)
