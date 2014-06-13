@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../hdr"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;AVR;AVR32"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;AVR;AVR32;CUSTOM_FUNCTIONS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
