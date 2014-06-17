@@ -315,7 +315,7 @@ void *ImageDataAlloc(ParseContext *c, size_t size)
     return addr;
 }
 
-void Abort(jmp_buf errorTarget, const char *fmt, ...)
+void Abort(ParseContext *c, const char *fmt, ...)
 {
     char buf[100], *p = buf;
     va_list ap;
@@ -326,7 +326,7 @@ void Abort(jmp_buf errorTarget, const char *fmt, ...)
         VM_putchar(*p++);
     VM_putchar('\n');
     va_end(ap);
-    longjmp(errorTarget, 1);
+    longjmp(c->errorTarget, 1);
 }
 
 void PrintValue(VMVALUE value)
