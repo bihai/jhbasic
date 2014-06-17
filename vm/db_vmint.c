@@ -261,7 +261,7 @@ int Execute(Interpreter *i, VMVALUE *stack, int stackSize)
             DoTrap(i, VMCODEBYTE(i->pc++));
             break;
         default:
-            Abort(i, "undefined opcode 0x%02x", VMCODEBYTE(i->pc - 1));
+            VM_abort(i, "undefined opcode 0x%02x", VMCODEBYTE(i->pc - 1));
             break;
         }
     }
@@ -318,17 +318,17 @@ static void DoTrap(Interpreter *i, int op)
         break;
 #endif
     default:
-        Abort(i, "undefined trap %d", op);
+        VM_abort(i, "undefined trap %d", op);
         break;
     }
 }
 
 static void StackOverflow(Interpreter *i)
 {
-    Abort(i, "stack overflow");
+    VM_abort(i, "stack overflow");
 }
 
-void Abort(Interpreter *i, const char *fmt, ...)
+void VM_abort(Interpreter *i, const char *fmt, ...)
 {
     char buf[100], *p = buf;
     va_list ap;

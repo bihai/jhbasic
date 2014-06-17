@@ -60,10 +60,12 @@ int VM_getchar(void)
     return getchar();
 }
 
+#ifndef CUSTOM_FUNCTIONS
 void VM_putchar(int ch)
 {
     putchar(ch);
 }
+#endif
 
 #ifdef LOAD_SAVE
 

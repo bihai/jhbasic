@@ -80,8 +80,10 @@ typedef int16_t VMVALUE;
 typedef uint16_t VMUVALUE;
 #endif
 
+#undef DATA_OFFSET
 #define DATA_OFFSET             0x8000U
 
+#undef ALIGN_MASK
 #define ALIGN_MASK              1
 
 #ifdef AVR_VM
