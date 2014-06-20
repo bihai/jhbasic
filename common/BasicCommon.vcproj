@@ -169,10 +169,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\hdr\db_abort.h"
-				>
-			</File>
-			<File
 				RelativePath="..\hdr\db_compiler.h"
 				>
 			</File>
