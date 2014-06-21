@@ -1,6 +1,17 @@
+*.img
 *.suo
 *.ncb
 *.user
 */Debug/*
 */Release/*
 compiler_obj/*
+vm_obj/*
+vmavr/obj/*
+vmavr/bin/*
+vmavr/bin2c
+vmavr/*.img
+vmavr/vmimage.h
+lib/*
+compile
+execute
+

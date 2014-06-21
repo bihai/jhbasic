@@ -2,12 +2,13 @@ def printone(n)
  print n; " ";
 end def
 
-print "Count to 10000"
-for n = 0 to 10000
- if n mod 100 = 0 then
+print "Count to 100"
+print
+for n = 1 to 100
+ printone(n)
+ if n mod 10 = 0 then
    print
  end if
- printone(n)
 next n
 print
 print "DONE!"

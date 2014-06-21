@@ -46,8 +46,8 @@ $(VM_OBJDIR)/osint_posix.o
 #DEBUG += -DCOMPILER_DEBUG
 #DEBUG += -DVM_DEBUG
 
-#CFLAGS = -Wall -DAVR -Os -I$(HDRDIR)
-CFLAGS = -Wall -DAVR -DAVR32 -g -I$(HDRDIR) $(DEBUG)
+#CFLAGS = -Wall -Os -I$(HDRDIR)
+CFLAGS = -Wall -g -I$(HDRDIR) $(DEBUG)
 LFLAGS = $(CFLAGS) -L$(LIBDIR)
 
 all:	compile execute

@@ -12,6 +12,18 @@ extern "C"
 {
 #endif
 
+/*****************/
+/* Configuration */
+/*****************/
+
+/* size of a virtual machine value */
+//#define VM_VALUE_16
+#define VM_VALUE_32
+
+/* size of a virtual machine address */
+//#define VM_ADDRESS_32
+#define VM_ADDRESS_16
+
 /**********/
 /* Common */
 /**********/
@@ -37,99 +49,60 @@ typedef unsigned __int32 uint32_t;
 /* minimum stack size */
 #define MIN_STACK_SIZE      32
 
-/*****************/
-/* MAC and LINUX */
-/*****************/
-
-#if defined(MAC) || defined(LINUX) || defined(WIN32)
-
-#include <stdio.h>
-#include <string.h>
-
-typedef int16_t VMWORD;
-typedef int32_t VMVALUE;
-typedef uint32_t VMUVALUE;
-
-#define DATA_OFFSET             0x80000000
-
-#define ALIGN_MASK              3
-
-#define VMCODEBYTE(p)           *(uint8_t *)(p)
-#define VMCODEVALUE(p)          *(VMVALUE *)(p)
-#define VMCODEUVALUE(p)         *(VMUVALUE *)(p)
-
-#endif  // MAC
-
-/*******/
-/* AVR */
-/*******/
-
-#if defined(AVR)
-
-#include <stdio.h>
-#include <string.h>
-
-typedef int16_t VMWORD;
-
-#ifdef AVR32
-typedef int32_t VMVALUE;
-typedef uint32_t VMUVALUE;
-#define VMVALUE_FMT             "%ld"
-#else
+/* type for virtual machine values */
+#if defined(VM_VALUE_16)
 typedef int16_t VMVALUE;
 typedef uint16_t VMUVALUE;
+#elif defined(VM_VALUE_32)
+typedef int32_t VMVALUE;
+typedef uint32_t VMUVALUE;
+#else
+#error define either VM_VALUE_16 or VM_VALUE_32
 #endif
 
-#undef DATA_OFFSET
+typedef int16_t VMWORD;
+
+/* definitions for virtual machine addresses */
+/* TEXT always starts at zero and DATA_OFFSET is the offset where SRAM starts */
+#if defined(VM_ADDRESS_16)
 #define DATA_OFFSET             0x8000U
-
-#undef ALIGN_MASK
 #define ALIGN_MASK              1
+#elif defined(VM_ADDRESS_32)
+#define DATA_OFFSET             0x80000000U
+#define ALIGN_MASK              3
+#else
+#error define either VM_ADDRESS_16 or VM_ADDRESS_32
+#endif
 
-#ifdef AVR_VM
+/* AVR uses special functions to access data in flash */
+#ifdef AVR
+
 #include <avr/pgmspace.h>
 #define VMCODEBYTE(p)           ((uint8_t)pgm_read_byte(p))
-#ifdef AVR32
+
+#if defined(VM_VALUE_16)
+#define VMCODEVALUE(p)          ((VMVALUE)pgm_read_word(p))
+#define VMCODEUVALUE(p)         ((VMUVALUE)pgm_read_word(p))
+#elif defined (VM_VALUE_32)
 #define VMCODEVALUE(p)          ((VMVALUE)pgm_read_dword(p))
 #define VMCODEUVALUE(p)         ((VMUVALUE)pgm_read_dword(p))
 #else
-#define VMCODEVALUE(p)          ((VMVALUE)pgm_read_word(p))
-#define VMCODEUVALUE(p)         ((VMUVALUE)pgm_read_word(p))
+#error define either VM_VALUE_16 or VM_VALUE_32
 #endif
+
+/* format for printing a value */
+#define VMVALUE_FMT             "%ld"
+
 #else
-#define VMCODEBYTE(p)           *(uint8_t *)(p)
-#define VMCODEVALUE(p)          *(VMVALUE *)(p)
-#define VMCODEUVALUE(p)         *(VMUVALUE *)(p)
-#endif
 
-#endif  // MAC
-
-/*****************/
-/* PROPELLER_GCC */
-/*****************/
-
-#ifdef PROPELLER_GCC
-
-#include <string.h>
-
-typedef int16_t VMWORD;
-typedef int32_t VMVALUE;
-typedef uint32_t VMUVALUE;
-
-#define DATA_OFFSET             0x00008000
-
-#define ALIGN_MASK              3
-
-int strcasecmp(const char *s1, const char *s2);
-
+/* other processors can use normal pointer dereferencing */
 #define VMCODEBYTE(p)           *(uint8_t *)(p)
 #define VMCODEVALUE(p)          *(VMVALUE *)(p)
 #define VMCODEUVALUE(p)         *(VMUVALUE *)(p)
 
-#endif  // PROPELLER_GCC
-
-#ifndef VMVALUE_FMT
+/* format for printing a value */
 #define VMVALUE_FMT             "%d"
+
 #endif
 
 #ifdef __cplusplus

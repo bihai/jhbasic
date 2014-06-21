@@ -5,6 +5,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 #include "db_compiler.h"
 
 /* local function prototypes */
