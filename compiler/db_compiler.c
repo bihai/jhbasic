@@ -262,7 +262,7 @@ String *AddString(ParseContext *c, char *value)
             return str;
 
     /* allocate the string structure */
-    str = GlobalAlloc(c, sizeof(String));
+    str = GlobalAllocBasic(c, sizeof(String));
     str->data = (char *)ImageTextAlloc(c, strlen(value) + 1);
     strcpy(str->data, value);
     str->next = c->strings;
@@ -273,7 +273,7 @@ String *AddString(ParseContext *c, char *value)
 }
 
 /* LocalAlloc - allocate memory from the local heap */
-void *LocalAlloc(ParseContext *c, size_t size)
+void *LocalAllocBasic(ParseContext *c, size_t size)
 {
     void *addr = c->localFree;
     size = (size + HOST_ALIGN_MASK) & ~HOST_ALIGN_MASK;
@@ -284,7 +284,7 @@ void *LocalAlloc(ParseContext *c, size_t size)
 }
 
 /* GlobalAlloc - allocate memory from the global heap */
-void *GlobalAlloc(ParseContext *c, size_t size)
+void *GlobalAllocBasic(ParseContext *c, size_t size)
 {
     size = (size + HOST_ALIGN_MASK) & ~HOST_ALIGN_MASK;
     if (c->globalFree - size < c->localFree)

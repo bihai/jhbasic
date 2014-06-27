@@ -43,12 +43,12 @@ ParseTreeNode *ParseExpr(ParseContext *c)
     if ((tkn = GetToken(c)) == T_OR) {
         ParseTreeNode *node2 = NewParseTreeNode(c, NodeTypeDisjunction);
         ExprListEntry *entry, **pLast;
-        node2->u.exprList.exprs = entry = (ExprListEntry *)LocalAlloc(c, sizeof(ExprListEntry));
+        node2->u.exprList.exprs = entry = (ExprListEntry *)LocalAllocBasic(c, sizeof(ExprListEntry));
         entry->expr = node;
         entry->next = NULL;
         pLast = &entry->next;
         do {
-            entry = (ExprListEntry *)LocalAlloc(c, sizeof(ExprListEntry));
+            entry = (ExprListEntry *)LocalAllocBasic(c, sizeof(ExprListEntry));
             entry->expr = ParseExpr2(c);
             entry->next = NULL;
             *pLast = entry;
@@ -69,12 +69,12 @@ static ParseTreeNode *ParseExpr2(ParseContext *c)
     if ((tkn = GetToken(c)) == T_AND) {
         ParseTreeNode *node2 = NewParseTreeNode(c, NodeTypeConjunction);
         ExprListEntry *entry, **pLast;
-        node2->u.exprList.exprs = entry = (ExprListEntry *)LocalAlloc(c, sizeof(ExprListEntry));
+        node2->u.exprList.exprs = entry = (ExprListEntry *)LocalAllocBasic(c, sizeof(ExprListEntry));
         entry->expr = node;
         entry->next = NULL;
         pLast = &entry->next;
         do {
-            entry = (ExprListEntry *)LocalAlloc(c, sizeof(ExprListEntry));
+            entry = (ExprListEntry *)LocalAllocBasic(c, sizeof(ExprListEntry));
             entry->expr = ParseExpr2(c);
             entry->next = NULL;
             *pLast = entry;
@@ -423,7 +423,7 @@ static ParseTreeNode *ParseCall(ParseContext *c, ParseTreeNode *functionNode)
         SaveToken(c, tkn);
         do {
             ExprListEntry *actual;
-            actual = (ExprListEntry *)LocalAlloc(c, sizeof(ExprListEntry));
+            actual = (ExprListEntry *)LocalAllocBasic(c, sizeof(ExprListEntry));
             actual->expr = ParseExpr(c);
             actual->next = NULL;
             *pLast = actual;
@@ -537,7 +537,7 @@ static ParseTreeNode *MakeBinaryOpNode(ParseContext *c, int op, ParseTreeNode *l
 /* NewParseTreeNode - allocate a new parse tree node */
 static ParseTreeNode *NewParseTreeNode(ParseContext *c, int type)
 {
-    ParseTreeNode *node = (ParseTreeNode *)LocalAlloc(c, sizeof(ParseTreeNode));
+    ParseTreeNode *node = (ParseTreeNode *)LocalAllocBasic(c, sizeof(ParseTreeNode));
     memset(node, 0, sizeof(ParseTreeNode));
     node->nodeType = type;
     return node;

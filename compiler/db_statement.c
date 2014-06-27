@@ -878,7 +878,7 @@ static void DefineLabel(ParseContext *c, char *name, int offset)
         }
 
     /* allocate the label structure */
-    label = (Label *)LocalAlloc(c, sizeof(Label) + strlen(name));
+    label = (Label *)LocalAllocBasic(c, sizeof(Label) + strlen(name));
     memset(label, 0, sizeof(Label));
     strcpy(label->name, name);
     label->offset = offset;
@@ -904,7 +904,7 @@ static int ReferenceLabel(ParseContext *c, char *name, int offset)
         }
 
     /* allocate the label structure */
-    label = (Label *)LocalAlloc(c, sizeof(Label) + strlen(name));
+    label = (Label *)LocalAllocBasic(c, sizeof(Label) + strlen(name));
     memset(label, 0, sizeof(Label));
     strcpy(label->name, name);
     label->fixups = offset;

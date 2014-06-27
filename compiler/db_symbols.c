@@ -32,7 +32,7 @@ Symbol *AddGlobal(ParseContext *c, const char *name, StorageClass storageClass, 
             return sym;
     
     /* allocate the symbol structure */
-    sym = (Symbol *)GlobalAlloc(c, size);
+    sym = (Symbol *)GlobalAllocBasic(c, size);
     sym->storageClass = storageClass;
     strcpy(sym->name, name);
     sym->value = value;
@@ -66,7 +66,7 @@ static Symbol *AddLocalSymbol(ParseContext *c, SymbolTable *table, const char *n
     Symbol *sym;
     
     /* allocate the symbol structure */
-    sym = (Symbol *)LocalAlloc(c, size);
+    sym = (Symbol *)LocalAllocBasic(c, size);
     strcpy(sym->name, name);
     sym->storageClass = storageClass;
     sym->value = value;

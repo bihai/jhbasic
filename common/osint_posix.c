@@ -11,7 +11,9 @@ int VM_getchar(void)
     return getchar();
 }
 
+#ifndef CUSTOM_FUNCTIONS
 void VM_putchar(int ch)
 {
     putchar(ch);
 }
+#endif //CUSTOM_FUNCTIONS
