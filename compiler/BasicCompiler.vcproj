@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../hdr"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;LIBRARY;CUSTOM_FUNCTIONS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;LIBRARY;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

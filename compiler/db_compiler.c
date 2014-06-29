@@ -81,8 +81,8 @@ int Compile(ParseContext *c, uint8_t *imageSpace, size_t imageSize, size_t textM
     InitSymbolTable(&c->globals);
     
     /* enter the built-in functions */
-    EnterBuiltInFunction(c, "delayms", bi_delayms, sizeof(bi_delayms));
-    EnterBuiltInFunction(c, "updateleds", bi_updateleds, sizeof(bi_updateleds));
+    EnterBuiltInFunction(c, "delayMs", bi_delayms, sizeof(bi_delayms));
+    EnterBuiltInFunction(c, "updateLeds", bi_updateleds, sizeof(bi_updateleds));
     
     /* enter the built-in variables */
     /*
@@ -91,12 +91,14 @@ int Compile(ParseContext *c, uint8_t *imageSpace, size_t imageSize, size_t textM
             int32_t triggerBottom;
             int32_t numLeds;
             int32_t led[RGB_SIZE];
+			int32_t patternnum;
         } VM_variables;
     */
-    EnterBuiltInVariable(c, "triggertop", sizeof(VMVALUE));
-    EnterBuiltInVariable(c, "triggerbottom", sizeof(VMVALUE));
-    EnterBuiltInVariable(c, "numleds", sizeof(VMVALUE));
+    EnterBuiltInVariable(c, "triggerTop", sizeof(VMVALUE));
+    EnterBuiltInVariable(c, "triggerBottom", sizeof(VMVALUE));
+    EnterBuiltInVariable(c, "numLeds", sizeof(VMVALUE));
     EnterBuiltInVariable(c, "led", sizeof(VMVALUE) * RGB_SIZE);
+	EnterBuiltInVariable(c, "patternNum", sizeof(VMVALUE));
     
     /* initialize the string table */
     c->strings = NULL;
