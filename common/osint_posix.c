@@ -15,19 +15,20 @@ int VM_getchar(void)
     return getchar();
 }
 
-void VM_putchar(int ch)
-{
-    putchar(ch);
-}
-
-
 void VM_DelayMs(VMVALUE ms)
 {
 	//_delay_ms((double)ms);
 	Sleep(ms);
 }
 
+#ifndef CUSTOM_FUNCTIONS
+void VM_putchar(int ch)
+{
+    putchar(ch);
+}
+
 void VM_UpdateLeds(void)
 {
 	VM_printf("UpdateLeds called\n");
 }
+#endif //CUSTOM_FUNCTIONS
