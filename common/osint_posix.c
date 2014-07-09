@@ -17,8 +17,11 @@ int VM_getchar(void)
 
 void VM_DelayMs(VMVALUE ms)
 {
-	//_delay_ms((double)ms);
-	Sleep(ms);
+#if defined(WIN32)
+    Sleep(ms);
+#else
+//    _delay_ms((double)ms);
+#endif
 }
 
 #ifndef CUSTOM_FUNCTIONS

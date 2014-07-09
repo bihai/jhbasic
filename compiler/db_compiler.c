@@ -274,7 +274,7 @@ String *AddString(ParseContext *c, char *value)
     return str;
 }
 
-/* LocalAlloc - allocate memory from the local heap */
+/* LocalAllocBasic - allocate memory from the local heap */
 void *LocalAllocBasic(ParseContext *c, size_t size)
 {
     void *addr = c->localFree;
@@ -285,7 +285,7 @@ void *LocalAllocBasic(ParseContext *c, size_t size)
     return addr;
 }
 
-/* GlobalAlloc - allocate memory from the global heap */
+/* GlobalAllocBasic - allocate memory from the global heap */
 void *GlobalAllocBasic(ParseContext *c, size_t size)
 {
     size = (size + HOST_ALIGN_MASK) & ~HOST_ALIGN_MASK;

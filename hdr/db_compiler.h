@@ -50,6 +50,7 @@ enum {
     T_END,
     T_FOR,
     T_TO,
+    T_DOWNTO,
     T_STEP,
     T_NEXT,
     T_DO,

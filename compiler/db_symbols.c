@@ -28,7 +28,7 @@ Symbol *AddGlobal(ParseContext *c, const char *name, StorageClass storageClass, 
     
     /* check to see if the symbol is already defined */
     for (sym = c->globals.head; sym != NULL; sym = sym->next)
-        if (strcmp(name, sym->name) == 0)
+        if (strcasecmp(name, sym->name) == 0)
             return sym;
     
     /* allocate the symbol structure */

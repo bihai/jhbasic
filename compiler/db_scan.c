@@ -30,6 +30,7 @@ static struct {
 {   "END",      T_END       },
 {   "FOR",      T_FOR       },
 {   "TO",       T_TO        },
+{   "DOWNTO",   T_DOWNTO    },
 {   "STEP",     T_STEP      },
 {   "NEXT",     T_NEXT      },
 {   "DO",       T_DO        },
@@ -133,6 +134,7 @@ char *TokenName(int token)
     case T_END:
     case T_FOR:
     case T_TO:
+    case T_DOWNTO:
     case T_STEP:
     case T_NEXT:
     case T_DO:
@@ -381,7 +383,8 @@ static int IdentifierToken(ParseContext *c, int ch)
             ParseError(c, "Identifier too long");
         *p++ = ch;
     }
-    UngetC(c);
+    if (ch != EOF)
+        UngetC(c);
     *p = '\0';
 
     /* check to see if it is a keyword */

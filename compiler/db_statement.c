@@ -526,7 +526,7 @@ static void ParseFor(ParseContext *c)
 {
     ParseTreeNode *var, *step;
     int test, body, inst;
-    int tkn;
+    int dir, tkn;
     PVAL pv;
 
     PushBlock(c);
@@ -545,9 +545,18 @@ static void ParseFor(ParseContext *c)
     test = codeaddr(c);
     (*pv.fcn)(c, PV_STORE, &pv);
     (*pv.fcn)(c, PV_LOAD, &pv);
-    FRequire(c, T_TO);
+    
+    /* check for 'to' or 'downto' */
+    if ((tkn = GetToken(c)) == T_TO)
+        dir = 1;
+    else {
+        Require(c, tkn, T_DOWNTO);
+        dir = -1;
+    }
+
+    /* parse the end value expression */
     ParseRValue(c);
-    putcbyte(c, OP_LE);
+    putcbyte(c, dir == 1 ? OP_LE : OP_GE);
     putcbyte(c, OP_BRT);
     body = putcword(c, 0);
 
