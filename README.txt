@@ -55,6 +55,8 @@ END
 
 FOR var = start TO end [ STEP inc ]
 
+FOR var = start DOWNTO end [ STEP inc ]
+
 NEXT var
 
 DO
