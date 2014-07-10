@@ -2,16 +2,18 @@ OBJDIR = obj
 BINDIR = bin
 
 # basic program to include in the VM
-BASIC = count
+#BASIC = count
 #BASIC = array
+BASIC = index
 
 BAUDRATE=115200
 #BAUDRATE=57600
 
-AVRDUDE = /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/avrdude
-AVRCONF = /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf
+AVRPATH = /usr/local/CrossPack-AVR-20131216
+AVRDUDE = $(AVRPATH)/bin/avrdude
+AVRCONF = $(AVRPATH)/etc/avrdude.conf
 
-PORT ?= /dev/cu.usbmodemfa141
+PORT ?= /dev/cu.usbmodem1421
 
 CC = avr-gcc
 OBJCOPY = avr-objcopy
@@ -29,7 +31,7 @@ $(OBJDIR)/avruart.o
 TARGET_ELF = $(BINDIR)/vmavr.elf
 TARGET = $(BINDIR)/vmavr.hex
 
-CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(FREQ) -MMD -DAVR -DAVR32 -DAVR_VM -I../hdr
+CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(FREQ) -MMD -DAVR -DAVR_VM -I../hdr
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 
 #OBJS += $(OBJDIR)/db_vmdebug.o
